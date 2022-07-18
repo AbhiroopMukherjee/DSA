@@ -3,7 +3,6 @@ C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ScratchPad.deps.jso
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ScratchPad.runtimeconfig.json
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ScratchPad.runtimeconfig.dev.json
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ScratchPad.dll
-C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ref\ScratchPad.dll
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\bin\Debug\net5.0\ScratchPad.pdb
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ScratchPad.csproj.AssemblyReference.cache
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ScratchPad.GeneratedMSBuildEditorConfig.editorconfig
@@ -14,3 +13,4 @@ C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ScratchPad.dll
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ref\ScratchPad.dll
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ScratchPad.pdb
 C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\ScratchPad.genruntimeconfig.cache
+C:\Repos\Personal\DSA\Algorithms\ScratchPad\obj\Debug\net5.0\refint\ScratchPad.dll
