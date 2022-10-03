@@ -19,12 +19,13 @@ namespace ScratchPad
     {
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+#region function Calls
             // var obj1 = new second();
             // first obj2 = obj1;
             // System.Console.WriteLine(obj2);
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             //AddTwoNums();
             //MaxPairwiseProduct();
@@ -67,10 +68,208 @@ namespace ScratchPad
 
             //BinarySearchSortedArrayIterative(new int[]{1,2,3,4,5,6,7,8},1);
 
-            NaivePolyMult(new int[]{1,2,3}, new int[]{4,5,6});
+            //NaivePolyMult(new int[]{1,2,3}, new int[]{4,5,6});
+
+            //SelectionSort(new int[]{44,33,77,99,1,5,9,4,66,22,33});
+
+            // var result1 = MergeSort(new List<int>{44,33,77,99,1,5,9,4,66,22,33});
+            // foreach(var element in result1)
+            // {
+            //     System.Console.Write(element + " ");
+            // }
+
+            // var input = new List<int>{44,33,77,99,1,5,9,4,66,22,33};
+            // QuickSort(input,0,10);
+            // foreach(var element in input)
+            // {
+            //     System.Console.Write(element + " ");
+            // }
+
+            // var input2 = new List<int>{44,33,44,33,1,5,44,33,44,44,33,44,44};
+            // RandomizedQuickSort3(input2,0,10);
+            // foreach(var element in input2)
+            // {
+            //     System.Console.Write(element + " ");
+            // }
+
+            MajorityElement(new List<int>{44,33,44,33,1,5,44,33,44,44,33,44,44});
+#endregion
 
             stopwatch.Stop();
             Console.WriteLine("Elapsed Time is {0} ms", stopwatch.ElapsedMilliseconds); 
+        }
+
+#region functions
+        private static void MajorityElement(List<int> input)
+        {
+            var sortedList = MergeSort(input);
+
+            int range = 0;
+            for(int i=0;i<sortedList.Count-1;i++)
+            {
+                if(sortedList[i]==sortedList[i+1])
+                {
+                    range+=1;
+                    if(range+1>sortedList.Count/2)
+                {
+                    System.Console.WriteLine("Majority Element - "+sortedList[i]);
+                }
+                }
+                else
+                {
+                    range = 0;
+                }
+            }
+        }
+
+        private static void RandomizedQuickSort3(List<int> input, int l, int r)
+        {
+            if(l>=r)
+            {
+                return;
+            }
+
+            Random x = new Random();
+            int k = x.Next(l,r);
+
+            (int m1,int m2) = Partition3(input,l,r);
+
+            RandomizedQuickSort3(input,l,m1-1);
+            RandomizedQuickSort3(input,m2+1,r);
+        }
+
+        private static (int m1, int m2) Partition3(List<int> input, int l, int r)
+        {
+            int m1 = l, m2 = l;
+
+            for(int i = l+1;i<=r;i++)
+            {
+                if(input[i]<input[l])
+                {
+                    m1+=1;
+                    m2+=1;
+                    if(m1==m2)
+                    {
+                        Swap(input,m1,i);
+                    }
+                    else
+                    {
+                        Swap(input,m1,i);
+                        Swap(input,m2,i);
+                    }
+                }
+                else if(input[i]==input[l])
+                {
+                    m2+=1;
+                    Swap(input,m2,i);
+                }
+            }
+            Swap(input,l,m1);
+
+            return(m1,m2);
+        }
+
+        private static void QuickSort(List<int> input,int l,int r)
+        {
+            if(l>=r)
+            {
+                return;
+            }
+
+            var m = partition(input,l,r);
+            
+            QuickSort(input,l,m-1);
+            QuickSort(input,m+1,r);
+        }
+
+        private static int partition(List<int> input, int l, int r)
+        {
+            int j = l;
+
+            for(int i=l+1; i<=r; i++)
+            {
+                if(input[i]<input[l])
+                {
+                    j+=1;
+                    Swap(input,j,i);
+                }
+            }
+            Swap(input,l,j);
+            return j;
+        }
+
+        private static List<int> MergeSort(List<int> input)
+        {
+            if(input.Count==1)
+            {   
+                 return input;
+            }
+
+            var m = input.Count/2;
+
+            var B = MergeSort(input.GetRange(0,m));
+            var C = MergeSort(input.GetRange(m,input.Count - m));
+
+            var D = Merge(B,C);
+            return D;
+        }
+
+        private static List<int> Merge(List<int> B, List<int> C)
+        {
+            List<int> D = new List<int>();
+
+            int i = 0,j = 0;
+
+            while(i < B.Count && j < C.Count)
+            {
+                if(B[i] < C[j])
+                {
+                    D.Add(B[i]);
+                    i++;
+                }
+                else
+                {
+                    D.Add(C[j]);
+                    j++;
+                }
+            }
+
+            if(i < B.Count)
+            {
+                D.AddRange(B.GetRange(i,B.Count-i));
+            }
+            else
+            {
+                D.AddRange(C.GetRange(j,C.Count-j));
+            }
+
+            return D;
+        }
+
+        private static void SelectionSort(int[] input)
+        {
+            for(int i = 0;i<input.Length;i++)
+            {
+                var minIndex = i;
+                for(int j=i+1;j<input.Length;j++)
+                {
+                    if(input[minIndex]>input[j])
+                    {
+                        minIndex = j;
+                    }
+                }
+                if(i!=minIndex)
+                {
+                    input[i] =  input[i] + input[minIndex];
+                    input[minIndex] = input[i] - input[minIndex];
+                    input[i] = input[i] - input[minIndex];
+                }
+            }
+
+            foreach(var element in input)
+            {
+                System.Console.Write(element+ " ");
+            }
         }
 
         private static void NaivePolyMult(int[] input1, int[] input2)
@@ -195,6 +394,7 @@ namespace ScratchPad
                 System.Console.Write(point + " ");
             }
         }
+        
         private static List<int> optimalPoints(Segment[] segments)
         {
             for(int i=0;i<segments.Count();i++)
@@ -541,9 +741,9 @@ namespace ScratchPad
 
             System.Console.WriteLine("Max pairwse product : " + (num1*num2));
         }
+#endregion
     
-    
-        #region methods/classes
+#region methods/classes
         
         static long getPisanoPeriodLength(int m)
         {
@@ -586,6 +786,13 @@ namespace ScratchPad
             input[i] = input[i] + input[k];
             input[k] = input[i] - input[k];
             input[i] = input[i] - input[k];
+        }
+
+        static void Swap(List<int> input,int i, int k)
+        {
+            var temp = input[i];
+            input[i] = input[k];
+            input[k] = temp;
         }           
         
         public class Segment {
@@ -596,7 +803,7 @@ namespace ScratchPad
                 this.end = end;
             }
     }
-        #endregion
+#endregion
     
     }
 }
