@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7t7pRhuclsEoBX8uoq31cbM4JkHnuy8z7GR8fjUi/rZ82PJRZJYsRARCBT7keQ1Y0hsCyImrHVoJ3jfT8gqqhw==",
+  "dgSpecHash": "txBN0m7hqLDtrPme5qtBqtChRz8Y2u03v90ck/w/d3e26/KLUsyKIPKAuDj2QjyneT2qQIzekQvb8Lf9lrp2Ew==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\Personal\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\187607\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

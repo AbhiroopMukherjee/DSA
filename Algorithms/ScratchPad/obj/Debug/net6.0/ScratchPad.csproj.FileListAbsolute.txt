@@ -1,0 +1,15 @@
+C:\Repos\DSA\Algorithms\ScratchPad\bin\Debug\net6.0\ScratchPad.exe
+C:\Repos\DSA\Algorithms\ScratchPad\bin\Debug\net6.0\ScratchPad.deps.json
+C:\Repos\DSA\Algorithms\ScratchPad\bin\Debug\net6.0\ScratchPad.runtimeconfig.json
+C:\Repos\DSA\Algorithms\ScratchPad\bin\Debug\net6.0\ScratchPad.dll
+C:\Repos\DSA\Algorithms\ScratchPad\bin\Debug\net6.0\ScratchPad.pdb
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.csproj.AssemblyReference.cache
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.AssemblyInfoInputs.cache
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.AssemblyInfo.cs
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.csproj.CoreCompileInputs.cache
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.dll
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\refint\ScratchPad.dll
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.pdb
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ScratchPad.genruntimeconfig.cache
+C:\Repos\DSA\Algorithms\ScratchPad\obj\Debug\net6.0\ref\ScratchPad.dll

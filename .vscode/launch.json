@@ -4,14 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
 
         {
         "name": ".NET Core Launch (console)",
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/Algorithms/ScratchPad/bin/Debug/net5.0/ScratchPad.dll",
+        "program": "${workspaceFolder}/DataStructures/ScratchPad/bin/Debug/net6.0/ScratchPad.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
