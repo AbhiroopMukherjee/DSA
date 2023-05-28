@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj": {}
+    "C:\\Repos\\Private\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj": {}
   },
   "projects": {
-    "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj": {
+    "C:\\Repos\\Private\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
+        "projectUniqueName": "C:\\Repos\\Private\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
         "projectName": "ScratchPad",
-        "projectPath": "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
-        "packagesPath": "C:\\Users\\DELL2\\.nuget\\packages\\",
-        "outputPath": "C:\\Repos\\DSA\\Algorithms\\ScratchPad\\obj\\",
+        "projectPath": "C:\\Repos\\Private\\DSA\\Algorithms\\ScratchPad\\ScratchPad.csproj",
+        "packagesPath": "C:\\Users\\abhiroop.mukherjee\\.nuget\\packages\\",
+        "outputPath": "C:\\Repos\\Private\\DSA\\Algorithms\\ScratchPad\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DELL2\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\abhiroop.mukherjee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -59,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

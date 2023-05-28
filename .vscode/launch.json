@@ -10,7 +10,7 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/DataStructures/ScratchPad/bin/Debug/net6.0/ScratchPad.dll",
+        "program": "${workspaceFolder}/Algorithms/ScratchPad/bin/Debug/net6.0/ScratchPad.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
