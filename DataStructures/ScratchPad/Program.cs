@@ -43,13 +43,13 @@ namespace ScratchPad
 
             //BuildAVLTree();
 
-            AVLMerge();
+            AVLMergenSplit();
 
             stopwatch.Stop();
             System.Console.WriteLine("Time:-"+stopwatch.ElapsedMilliseconds+"ms");
         }
 
-        private static void AVLMerge()
+        private static void AVLMergenSplit()
         {
             var avl1 = new AVLTree();
             avl1.AVLInsert(1);
@@ -92,6 +92,49 @@ namespace ScratchPad
 
             Inorder(avl1.root);
 
+
+            var avl3 = new AVLTree();
+            avl3.AVLInsert(3);
+            avl3.AVLInsert(2);
+            avl3.AVLInsert(1);
+            avl3.AVLInsert(6);
+            avl3.AVLInsert(5);
+            avl3.AVLInsert(4);
+            avl3.AVLInsert(7);
+            avl3.AVLInsert(8);
+            avl3.AVLInsert(9);
+            (NodeTree r1, NodeTree r2) = Split(avl1.root,16);
+
+            System.Console.WriteLine("After split");
+            System.Console.WriteLine("Tree1");
+            Inorder(r1);
+            System.Console.WriteLine("Tree2");
+            Inorder(r2);
+        }
+
+        private static (NodeTree r1, NodeTree r2) Split(NodeTree root, int key)
+        {
+            if(root == null)
+            {
+                return (null, null);
+            }
+            else if(key <= root.key)
+            {
+                (NodeTree r1, NodeTree r2) = Split(root.leftChild,key);
+                
+                var r3 = MergeWithRoot(r2,root.rightChild,root);
+                 
+                return (r1,r3);
+            }
+            else if(key > root.key)
+            {
+                (NodeTree r1, NodeTree r2) = Split(root.rightChild,key);
+                
+                var r3 = MergeWithRoot(root.leftChild,r1,root);
+                 
+                return (r3,r2);
+            }
+            return (null, null);
         }
 
         private static NodeTree Merge(AVLTree avl1, AVLTree avl2)
@@ -108,8 +151,7 @@ namespace ScratchPad
             var o = Math.Abs(r1h - r2h);
             if(o <=1)
             {
-                MergeWithRoot(root1,root2,t);
-                return t;
+                return MergeWithRoot(root1,root2,t);
             }
             else if(root1.Height() > root2.Height())
             {
@@ -130,13 +172,14 @@ namespace ScratchPad
             return null;
         }
 
-        private static void MergeWithRoot(NodeTree root1, NodeTree root2, NodeTree t)
+        private static NodeTree MergeWithRoot(NodeTree root1, NodeTree root2, NodeTree t)
         {
             t.leftChild = root1;
             t.rightChild = root2;
 
-            root1.parent = t;
-            root2.parent = t;
+            if(root1!=null) root1.parent = t;
+            if(root2!=null) root2.parent = t;
+            return t;
         }
 
         private static void BuildAVLTree()
