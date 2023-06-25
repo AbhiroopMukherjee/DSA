@@ -4,6 +4,8 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
+
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
@@ -15,7 +17,7 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/DataStructures/ScratchPad/bin/Debug/net6.0/ScratchPad.dll",
+        "program": "${workspaceFolder}/AlgoOnGraphs/bin/Debug/net7.0/AlgoOnGraphs.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
