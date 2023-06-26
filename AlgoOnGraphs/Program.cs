@@ -17,7 +17,76 @@ namespace Scratchpad
             //StronglyConnectedGraph();
             //BreadthFirstSearchUndirectedGraph(); //Bipartite solution needs fixing
             //DijkstrasAlgorithm();
-            BelmanFordAlgo();
+            //BelmanFordAlgo();
+            MinimumSpanningTree();
+        }
+
+        private static void MinimumSpanningTree()
+        {
+            int noOfCoordinates = Convert.ToInt32(Console.ReadLine());
+
+            double[] cost = new double[noOfCoordinates];
+            int[] parent = new int[noOfCoordinates];
+            int[] visited = new int[noOfCoordinates];
+            PriorityQueueMST queue = new PriorityQueueMST();
+            for(int i=0; i<cost.Length; i++)
+            {
+                cost[i] = int.MaxValue;
+                parent[i] = -1;
+                queue.Enqueue(new CostIndex{index=i, cost = int.MaxValue});
+            }
+            Coordinate[] coordinates = new Coordinate[noOfCoordinates];
+            for(int i=0; i<noOfCoordinates; i++)
+            {
+                coordinates[i] = new Coordinate();
+            }
+            
+            for(int i=0; i<noOfCoordinates; i++)
+            {
+                var input = Array.ConvertAll(Console.ReadLine()?.Split(' ') ?? Array.Empty<string>(), int.Parse);
+                coordinates[i].x = input[0];
+                coordinates[i].y = input[1];
+            }
+
+            cost[0] = 0;
+            queue.Update(0,0);
+
+            while(!queue.IsEmpty())
+            {
+                var point = queue.Dequeue();
+                visited[point.index] = 1;
+
+                for(int i=0; i<noOfCoordinates; i++)
+                {
+                    if(visited[i]==1)
+                    {
+                        continue;
+                    }
+
+                    var dist = CalculateDistance(coordinates[i],coordinates[point.index]);
+                    if(cost[i] > dist)
+                    {
+                        cost[i] = dist;
+                        parent[i] = point.index;
+                        queue.Update(i,dist);
+                    }
+                }
+            }
+
+            double result = cost.Sum();
+            string formattedResult = string.Format("{0:0.000000000}", result);
+            Console.WriteLine(formattedResult);
+        }
+
+        private static double CalculateDistance(Coordinate coordinate1, Coordinate coordinate2)
+        {
+            double dx = coordinate2.x - coordinate1.x;
+
+            double dy = coordinate2.y - coordinate1.y;
+
+            double distance = Math.Sqrt(dx * dx + dy * dy);
+
+            return distance;
         }
 
         private static void BelmanFordAlgo()
@@ -692,4 +761,112 @@ namespace Scratchpad
             weight = w;
         }
     }
+    
+    class Coordinate
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+    }
+
+    class CostIndex
+    {
+        public int index { get; set; }
+        public double cost { get; set; }
+    }
+
+    class PriorityQueueMST
+    {
+        public List<CostIndex> heap;
+
+        public PriorityQueueMST()
+        {
+            heap = new List<CostIndex>();
+        }
+
+        public int Size()
+        {
+            return heap.Count;
+        }
+
+        public bool IsEmpty()
+        {
+            return heap.Count == 0;
+        }
+
+        public void Enqueue(CostIndex item)
+        {
+            heap.Add(item);
+            HeapifyUp(heap.Count - 1);
+        }
+
+        public CostIndex Dequeue()
+        {
+            if (IsEmpty())
+            {
+                throw new InvalidOperationException("Priority queue is empty");
+            }
+
+            CostIndex root = heap[0];
+            heap[0] = heap[heap.Count - 1];
+            heap.RemoveAt(heap.Count - 1);
+            HeapifyDown(0);
+
+            return root;
+        }
+
+        private void HeapifyUp(int index)
+        {
+            int parent = (index - 1) / 2;
+            while (index > 0 && heap[index].cost < heap[parent].cost)
+            {
+                Swap(index, parent);
+                index = parent;
+                parent = (index - 1) / 2;
+            }
+        }
+
+        private void HeapifyDown(int index)
+        {
+            int leftChild = 2 * index + 1;
+            int rightChild = 2 * index + 2;
+            int smallest = index;
+
+            if (leftChild < heap.Count && heap[leftChild].cost < heap[smallest].cost)
+            {
+                smallest = leftChild;
+            }
+
+            if (rightChild < heap.Count && heap[rightChild].cost < heap[smallest].cost)
+            {
+                smallest = rightChild;
+            }
+
+            if (smallest != index)
+            {
+                Swap(index, smallest);
+                HeapifyDown(smallest);
+            }
+        }
+
+        private void Swap(int i, int j)
+        {
+            CostIndex temp = heap[i];
+            heap[i] = heap[j];
+            heap[j] = temp;
+        }
+
+        internal void Update(int index, double v)
+        {
+            for(int i=0;i<heap.Count;i++)
+            {
+                if(heap[i].index == index)
+                {
+                    heap[i].cost = v;
+                    HeapifyUp(i);
+                    break;
+                }
+            }
+        }
+    }
+
 }
