@@ -18,7 +18,7 @@ namespace Scratchpad
             //BreadthFirstSearchUndirectedGraph(); //Bipartite solution needs fixing
             //DijkstrasAlgorithm();
             //BelmanFordAlgo();
-            MinimumSpanningTree();
+            MinimumSpanningTree(); //Prims Algo
         }
 
         private static void MinimumSpanningTree()

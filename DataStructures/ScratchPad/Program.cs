@@ -43,10 +43,25 @@ namespace ScratchPad
 
             //BuildAVLTree();
 
-            AVLMergenSplit();
+            //AVLMergenSplit();
 
             stopwatch.Stop();
             System.Console.WriteLine("Time:-"+stopwatch.ElapsedMilliseconds+"ms");
+
+            
+            System.Console.WriteLine(IsPrime(7));
+
+            System.Console.WriteLine(Reverse("Hello World")); //!dlrow ,olleH
+        }
+
+        public static bool IsPrime(int number)
+        {
+            //Code here
+        }
+        
+        public static string Reverse(string str)
+        {
+            //Code here
         }
 
         private static void AVLMergenSplit()

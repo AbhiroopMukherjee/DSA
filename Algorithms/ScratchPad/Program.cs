@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace ScratchPad
 {
@@ -120,13 +121,893 @@ namespace ScratchPad
 
             //DiscreetKnapsackWithoutReps(10, new int[]{6,4,2,3}, new int[]{30,16,9,14});
 
-            MaxValueExpression(new int[]{5,8,7,4,8,9}, "-+x-+");
+            //MaxValueExpression(new int[]{5,8,7,4,8,9}, "-+x-+");
+
+            //LCGcdOfStrings("TAUXXTAUXXTAUXXTAUXXTAUXX", "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX");
+
+            //foreach(var x in LCKidsWithCandies(new int[]{4,2,1,1,2},1)) System.Console.WriteLine(x);
+
+            //System.Console.WriteLine(CanPlaceFlowers(new int[]{1,0,0,0,1},2));
+
+            //System.Console.WriteLine(ReverseVowels("Hello"));
+
+            //System.Console.WriteLine(ReverseWords("  hello world  "));
+
+            //foreach(var x in ProductExceptSelf(new int[]{1,2,3,4})) System.Console.WriteLine(x);
+
+            //System.Console.WriteLine(IncreasingTriplet(new int[]{1,5,1,4,1,3}));
+
+            //System.Console.WriteLine(Compress(new char[]{'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'}));
+
+            //MoveZeroes(new int[]{0,1,0,3,12});
+
+            //System.Console.WriteLine(MaxArea(new int[]{1,8,6,2,5,4,8,3,7}));
+
+            //System.Console.WriteLine(MaxOperations(new int[]{3,1,2,4,3},6));
+
+            //System.Console.WriteLine(FindMaxAverage(new int[]{1,0,1,4,2}, 4));
+
+            //System.Console.WriteLine(MaxVowels("leetcode",3));
+
+            //System.Console.WriteLine(LongestOnes(new int[]{1,1,1,0,0,0,1,1,1,1},0));
+
+            //System.Console.WriteLine(LongestSubarray(new int[]{1,1,1}));
+
+            //System.Console.WriteLine(LargestAltitude(new int[]{-4,-3,-2,-1,4,3,2}));
+
+            //System.Console.WriteLine(PivotIndex(new int[]{2,1,-1}));
+
+            //foreach(var x in FindDifference(new int[]{-73}, new int[]{-66,9,-54,-32,94,11}) )
+            // {
+            //     foreach(var y in x)
+            //     {
+            //         System.Console.Write(y+" ");
+            //     }
+            //     System.Console.WriteLine();
+            // }
+            
+            //System.Console.WriteLine(UniqueOccurrences(new int[]{-3,0,1,-3,1,1,1,-3,10,0}));
+
+            //System.Console.WriteLine(CloseStrings("aaabbbbccddeeeeefffff","aaaaabbcccdddeeeeffff"));
+
+            //System.Console.WriteLine(EqualPairs(new int[][] { new int[] { 3, 2, 1 }, new int[] { 1, 7, 6 }, new int[] { 2, 7, 7 } }));
+
+            System.Console.WriteLine(RemoveStars("erase*****"));
             #endregion
 
             stopwatch.Stop();
             System.Console.WriteLine("Time:-"+stopwatch.ElapsedMilliseconds+"ms");
 
         }
+        public static string RemoveStars(string s) 
+        {
+            Stack<char> stack = new Stack<char>();
+
+            foreach(var x in s)
+            {
+                if(x=='*' && stack.Count!=0)
+                {
+                    stack.Pop();
+                }
+                else
+                {
+                    stack.Push(x);
+                }
+            }
+
+            char[] result = new char[stack.Count];
+
+            for(int i=stack.Count-1; i>=0; i--)
+            {
+                result[i] = stack.Pop();
+            }
+
+            return new string(result);
+        }
+
+        public static int EqualPairs(int[][] grid) 
+        {
+            int count =0;
+
+            for(int i=0; i<grid.Length; i++)
+            {
+                for(int j=0; j<grid.Length; j++)
+                {
+                    var flag = true;
+                    for(int k=0; k<grid.Length; k++)
+                    {
+                        if(grid[k][i] != grid[j][k])
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+        
+        public static bool CloseStrings(string word1, string word2) 
+        {
+            if(word1.Length!=word2.Length)
+            {
+                return false;
+            }
+
+            foreach(var x in word1.Distinct())
+            {
+                if(!word2.Contains(x))
+                {
+                    return false;
+                }
+            }
+
+            var lengths1 = GetUniqueLetterCounts(word1);
+            var lengths2 = GetUniqueLetterCounts(word2);
+
+            Array.Sort(lengths1);
+            Array.Sort(lengths2);
+
+            for(int i=0; i<lengths1.Count();i++)
+            {
+                if(lengths1[i]!=lengths2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static int[] GetUniqueLetterCounts(string word)
+        {
+            Dictionary<char,int> hash = new Dictionary<char, int>();
+
+            foreach(var x in word)
+            {
+                if(hash.Keys.Contains(x))
+                {
+                    hash[x] += 1;
+                }
+                else
+                {
+                    hash.Add(x,1);
+                }
+            }
+
+            return hash.Values.ToArray();
+        }
+
+        public static bool UniqueOccurrences(int[] arr) 
+        {
+            Array.Sort(arr);
+            List<int> counts = new List<int>();
+            int count = 0;
+
+            for(int i=0;i<arr.Length-1;i++)
+            {
+                if(arr[i]==arr[i+1])
+                {
+                    count++;
+                }
+                else
+                {
+                    if(counts.Contains(count))
+                    {
+                        return false;
+                    }
+                    counts.Add(count);
+                    count = 0;
+                }
+            }
+
+            if(counts.Contains(count))
+            {
+                return false;
+            }
+
+            return true;            
+        }
+
+        public static IList<IList<int>> FindDifference(int[] nums1, int[] nums2) 
+        {
+            Array.Sort(nums1);
+            Array.Sort(nums2);
+
+            IList<IList<int>> list = new List<IList<int>>();
+            list.Add(new List<int>());
+            list.Add(new List<int>());
+
+            int i=0, j=0;
+
+            while(i<nums1.Length && j<nums2.Length)
+            {
+                if(nums1[i]==nums2[j])
+                {
+                    i++;
+                    j++;
+
+                    while(i<nums1.Length && nums1[i]==nums1[i-1])
+                    {
+                        i++;
+                    }
+                    while(j<nums2.Length && nums2[j]==nums2[j-1])
+                    {
+                        j++;
+                    }
+                }
+                else if(nums1[i]<nums2[j])
+                {
+                    list[0].Add(nums1[i]);
+                    i++;
+                    while(i<nums1.Length && nums1[i]==nums1[i-1] )
+                    {
+                        i++;
+                    }
+                }
+                else
+                {
+                    list[1].Add(nums2[j]);
+                    j++;
+                    while(j<nums2.Length && nums2[j]==nums2[j-1])
+                    {
+                        j++;
+                    }
+                }
+            }
+
+            while(j<nums2.Length)
+            {
+                if(j>0 && nums2[j-1]==nums2[j])
+                {
+                    continue;
+                }
+                list[1].Add(nums2[j]);
+                j++;
+            }
+        
+            while(i<nums1.Length)
+            {
+                if(i>0 && nums1[i-1]==nums1[i])
+                {
+                    continue;
+                }
+                list[0].Add(nums1[i]);
+                i++;
+            }
+            return list;
+        }
+
+        public static int PivotIndex(int[] nums) 
+        {
+            int length = nums.Length;
+            int[] LeftNums = new int[length];
+            int[] RightNums = new int[length];
+
+            for(int i=0,j=length-1; i<length; i++,j--)
+            {
+                if(i==0)
+                {
+                    LeftNums[i]=0;
+                }
+                else
+                {
+                    LeftNums[i] = nums[i-1] + LeftNums[i-1];
+                }
+                if(j==length-1)
+                {
+                    RightNums[j]=0;
+                }
+                else
+                {
+                    RightNums[j] = nums[j+1] + RightNums[j+1];
+                }
+            }
+            for(int i=0; i<length; i++)
+            {
+                if(RightNums[i]==LeftNums[i])
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public static int LargestAltitude(int[] gain) 
+        {
+            int max = 0;
+            int g = 0;
+            foreach(var x in gain)
+            {
+                g+=x;
+                if(g>max)
+                {
+                    max=g;
+                }
+            }
+
+            return max;
+        }
+
+        public static int LongestSubarray(int[] nums) 
+        {
+            int sum = 0, max=0, k=1;
+            int sp = 0; 
+            Queue<int> zeroIndex = new Queue<int>();
+            
+            for(int i=0; i<nums.Length;i++)
+            {
+                if(nums[i]==1)
+                {
+                    sum+=1;
+                }
+                else
+                {
+                    if(k==0)
+                    {
+                        if(zeroIndex.Count==0)
+                        {
+                            if(sum>max)
+                            {
+                                max=sum;
+                            }
+                            sum=0;
+                            continue;
+                        } 
+                        if(sp<zeroIndex.FirstOrDefault())
+                        {
+                            var zero1 = zeroIndex.FirstOrDefault();
+                            sum-=zero1-sp;
+                            sp = zero1+1;
+                        }
+                        else
+                        {
+                            sp+=1;
+                        }
+
+                        zeroIndex.Dequeue();
+                        zeroIndex.Enqueue(i);
+                    }
+                    else
+                    {
+                        sum+=1;
+                        zeroIndex.Enqueue(i);
+                        k--;
+                    }
+                }
+                if(sum>max)
+                {
+                    max=sum;
+                }
+            }
+
+            return max-1;
+        }
+
+        public static int LongestOnes(int[] nums, int k) 
+        {
+            int sum = 0, max=0;;
+            int sp = 0; 
+            Queue<int> zeroIndex = new Queue<int>();
+            
+            for(int i=0; i<nums.Length;i++)
+            {
+                if(nums[i]==1)
+                {
+                    sum+=1;
+                }
+                else
+                {
+                    if(k==0)
+                    {
+                        if(zeroIndex.Count==0)
+                        {
+                            if(sum>max)
+                            {
+                                max=sum;
+                            }
+                            sum=0;
+                            continue;
+                        } 
+                        if(sp<zeroIndex.FirstOrDefault())
+                        {
+                            var zero1 = zeroIndex.FirstOrDefault();
+                            sum-=zero1-sp;
+                            sp = zero1+1;
+                        }
+                        else
+                        {
+                            sp+=1;
+                        }
+
+                        zeroIndex.Dequeue();
+                        zeroIndex.Enqueue(i);
+                    }
+                    else
+                    {
+                        sum+=1;
+                        zeroIndex.Enqueue(i);
+                        k--;
+                    }
+                }
+                if(sum>max)
+                {
+                    max=sum;
+                }
+            }
+
+            return max;
+        }
+
+        public static int MaxVowels(string s, int k) 
+        {
+            int i=0, j=k-1, count=0;
+            for (int x = 0; x < k; x++)
+            {
+                if(s[x]=='a' || s[x]=='e' || s[x]=='i' || s[x]=='o' || s[x]=='u')
+                {
+                    count++;
+                }
+            }
+
+            int max = count;
+            
+            while(j<s.Length-1)
+            {
+                j++;
+                if((s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u') && !(s[j]=='a' || s[j]=='e' || s[j]=='i' || s[j]=='o' || s[j]=='u'))
+                {
+                    count--;
+                }
+                else if(!(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u') && (s[j]=='a' || s[j]=='e' || s[j]=='i' || s[j]=='o' || s[j]=='u'))
+                {
+                    count++;
+                }
+
+                if(count>max)
+                {
+                    max = count;
+                }
+
+                i++;
+            }
+
+            return max;
+        }
+
+        public static double FindMaxAverage(int[] nums, int k) 
+        {
+            int i=0, j=i+k-1, sum=0;
+            for (int x = 0; x < k; x++)
+            {
+                sum += nums[x];
+            }
+            
+            double avg = (double)sum/k;
+
+            int a=nums[i], b=nums[j]; 
+            //i++; j++;
+            while(j<nums.Length-1)
+            {
+                sum-=nums[i];
+                i++;
+                j++;
+                sum+=nums[j];
+                var lavg = (double)sum/k;
+                if(lavg>avg)
+                {
+                    avg=lavg;
+                }
+
+            }
+
+            return avg;
+        }
+
+        public static int MaxOperations(int[] nums, int k) 
+        {
+            Array.Sort(nums);
+            int count=0;
+            int i=0, j=nums.Length-1;
+
+            while(i<j)
+            {
+                var sum = nums[i]+nums[j];
+                if(sum==k)
+                {
+                    count++;
+                    i++;
+                    j--;
+                }
+                else if(sum>k)
+                {
+                    j--;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return count;
+        }
+
+        public static int MaxArea(int[] height) 
+        {
+            int i=0, j=height.Length-1;
+            int area = 0;
+
+            while(j!=i)
+            {
+                var min = Math.Min(height[i],height[j]);
+                var area1 = min*(j-i);
+                if(area1>area)
+                {
+                    area = area1;
+                }
+                if(height[i]==min)
+                {
+                    i++;
+                }
+                else
+                {
+                    j--;
+                }
+            }
+
+            return area;
+        }
+
+        public static int MaxAreaNaive(int[] height) 
+        {
+            int area = 0;
+            for(int i=0; i<height.Length-1;i++)
+            {
+                for(int j=i+1; j<height.Length;j++)
+                {
+                    var min = Math.Min(height[i],height[j]);
+                    var area1 = min*(j-i);
+                    if(area1>area)
+                    {
+                        area = area1;
+                    }
+                }
+            }
+            return area;
+        }
+
+        public static void MoveZeroes(int[] nums) 
+        {
+            for(int i=0, j=0; i<nums.Length;i++)
+            {
+                if(nums[i]==0)
+                {
+                    continue;
+                }
+                else if(nums[i]!=0 && nums[j]!=0)
+                {
+                    j++;
+                    continue;
+                }
+                else if(nums[j]==0 && nums[i]!=0)
+                {
+                    Swap(nums,i,j);
+                    j++;
+                }
+            }
+
+            foreach(var x in nums)
+            {
+                System.Console.Write(x + " ");
+            }
+        }
+
+        public static int Compress(char[] chars) 
+        {
+            int i=0,j=1,k=1;
+
+            while(k<chars.Count())
+            {
+                if(chars[i]==chars[k])
+                {
+                    k++;
+                    continue;
+                }
+                else
+                {
+                    if(k-i<2)
+                    {
+                        chars[j] = chars[k];
+                        i++;
+                        j++;
+                        k++;
+                    }
+                    else if(k-i<10)
+                    {
+                        chars[j] = (char)((k - i) + '0');
+                        j+=1;
+                        chars[j] = chars[k];
+                        i=k;
+                        k++;
+                        j++;
+                    }
+                    else if(k-i<100)
+                    {
+                        chars[j] = (char)(((k - i)/10) + '0');
+                        chars[j+1] = (char)(((k - i)%10) + '0');
+                        j+=2;
+                        chars[j] = chars[k];
+                        i=k;
+                        k++;
+                        j++;
+                    }
+                    else if(k-i<1000)
+                    {
+                        chars[j] = (char)(((k - i)/1000) + '0');
+                        chars[j+1] = (char)(((k - i)%1000) + '0');
+                        chars[j+2] = (char)(((k - i)%100) + '0');
+                        chars[j+3] = (char)(((k - i)%10) + '0');
+                        j+=4;
+                        chars[j] = chars[k];
+                        i=k;
+                        k++;
+                        j++;
+                    }
+                }
+            }
+
+            if(k-i>1){
+                if(k-i<10)
+                {
+                    chars[j] = (char)((k - i) + '0');
+                    j+=1;
+                    //chars[j] = chars[k-1];
+                    i=k;
+                    k++;
+                }
+                else if(k-i<100)
+                {
+                    chars[j] = (char)(((k - i)/10) + '0');
+                    chars[j+1] = (char)(((k - i)%10) + '0');
+                    j+=2;
+                    //chars[j] = chars[k-1];
+                    i=k;
+                    k++;
+                }
+                else if(k-i<1000)
+                {
+                    chars[j] = (char)(((k - i)/100) + '0');
+                    chars[j+1] = (char)(((k - i)%100) + '0');
+                    chars[j+2] = (char)(((k - i)%10) + '0');
+                    j+=3;
+                    i=k;
+                    k++;
+                }
+                else if(k-i<10000)
+                {
+                    chars[j] = (char)(((k - i)/1000) + '0');
+                    chars[j+1] = (char)(((k - i)%1000) + '0');
+                    chars[j+2] = (char)(((k - i)%100) + '0');
+                    chars[j+3] = (char)(((k - i)%10) + '0');
+                    j+=4;
+                    i=k;
+                    k++;
+                }
+            }
+
+            for(int x=0;x<k-1;x++)
+            {
+                System.Console.Write(chars[x]+" ");
+            }
+            return j; 
+        }
+
+        public static bool IncreasingTriplet(int[] nums) {
+            
+            //int i=0;
+            for(int j=1, i=0; i<nums.Length-2 || j<nums.Length-1; j++,i++)
+            {
+                bool flag = false;
+                if(nums[j]>nums[i])
+                {
+                    int l=j;
+                    for(int k=j+1; k<nums.Length;k++)
+                    {
+                        if(nums[k]>nums[l])
+                        {
+                            return true;
+                        }
+                        else if(nums[k]<nums[l] && nums[k]>nums[i])
+                        {
+                            l=k;
+                        }
+                        else
+                        {
+                            if(nums[k]<nums[i])
+                            {
+                                flag=true;
+                            }
+                        }
+                    }
+                    if(!flag) return false;
+                }
+            }
+            return false;
+        }
+
+        public static int[] ProductExceptSelf(int[] nums) 
+        {
+            int[] result = new int[nums.Length];
+            int[] left = new int[nums.Length];
+            int[] right = new int[nums.Length];
+
+            for(int i=0, j=nums.Length-1; i<nums.Length && j>=0; i++,j--)
+            {
+                if(i==0 && j==nums.Length-1)
+                {
+                    left[i] = 1;
+                    right[j] = 1;
+                }
+                else
+                {
+                    left[i] = left[i-1]*nums[i-1];
+                    right[j] = right[j+1]*nums[j+1];
+                }
+            }
+
+            for(int i=0;i<nums.Length;i++)
+            {
+                result[i] = left[i]*right[i];
+            }
+            return result;  
+        }
+
+        public static string ReverseWords(string s) {
+
+            string[] words = s.Split(" ").ToArray();
+
+            StringBuilder result = new StringBuilder();
+
+            for(int i=words.Count()-1; i>=0; i--)
+            {
+                if(words[i]== "") continue;
+                result.Append(words[i]+" ");
+            }
+            return result.Remove(result.Length-1,1).ToString();        
+        }
+        public static string ReverseVowels(string s) 
+        {
+            int[] indexes = new int[s.Length];
+            char[] chars = new char[s.Length];
+            int count = 0;
+
+            for(int i=0; i<s.Length; i++)
+            {
+                if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || 
+                s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+                {
+                    indexes[count] = i;
+                    chars[count]=s[i];
+                    count++;
+                } 
+            }
+
+            //var count = chars.Length;
+            string output = string.Empty;
+
+            for(int i=0, j=0; i<s.Length; i++)
+            {
+                if(count>0 && i==indexes[j])
+                {
+                    output+=chars[count-1];
+                    j++;
+                    count--;
+                }
+                else
+                {
+                    output+=s[i];
+                }
+            }
+
+            return output;
+        }
+
+        public static bool CanPlaceFlowers(int[] flowerbed, int n) 
+        {
+            for(int i=0; i<flowerbed.Length; i++)
+            {
+                if(n==0)
+                {
+                    break;
+                }
+                if(i==0 && flowerbed[i]==0 && flowerbed[i+1]==0)
+                {
+                    flowerbed[i] = 1;
+                    n--;
+                }
+                else if(i==flowerbed.Length-1 && flowerbed[i]==0 && flowerbed[i-1]==0)
+                {
+                    flowerbed[i] = 1;
+                    n--;
+                }
+                else if(flowerbed[i]==0 && flowerbed[i-1]==0 && flowerbed[i+1]==0)
+                {
+                    flowerbed[i] = 1;
+                    n--;
+                }
+            }
+
+            if(n==0) return true;
+            return false;
+        }
+
+        public static IList<bool> LCKidsWithCandies(int[] candies, int extraCandies) {
+            int max =0;
+            IList<bool> result = new List<bool>();
+
+            foreach(var c in candies){
+                if(max<c) max =c;
+                result.Add(false);
+            }
+
+            for(int i=0;i<candies.Length;i++){
+                if(candies[i]+extraCandies>=max)
+                {
+                    result[i] = true;
+                }
+                
+            }
+
+            return result;
+        }
+
+        private static void LCGcdOfStrings(string str1, string str2)
+        {
+            var l1 = str1.Length;
+            var l2 = str2.Length;
+
+            var gcd = SmartGcdLC(l1,l2);
+            var x = str2.Substring(0,gcd);
+            bool flag = true;
+
+            for(int i=0; i<=Math.Max(l1,l2)-gcd;i+=gcd){
+                if(i<=l1-gcd){
+                    if(!String.Equals(str1.Substring(i,gcd),x)){
+                        flag = false;
+                        break;
+                    }
+                }
+                if(i<=l2-gcd){
+                    if(!String.Equals(str2.Substring(i,gcd),x)){
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            
+            if(flag) System.Console.WriteLine(x);
+            else System.Console.WriteLine("NO MATCH");
+        }
+
+        public static int SmartGcdLC(int l1, int l2){
+            if(l1==0){
+                return l2;
+            } 
+
+            if(l1>=l2){
+                return SmartGcdLC(l1%l2,l2);
+            }
+            else{
+                return SmartGcdLC(l2%l1,l1);
+            }
+
+        }
+        
         #region functions
         private static void MaxValueExpression(int[] nums, string ops)
         {
@@ -1310,11 +2191,32 @@ namespace ScratchPad
             }
         }
 
+        static void Sort(int[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int k = i; k < input.Length; k++)
+                {
+                    if (input[i] > input[k])
+                    {
+                        Swap(input, i, k);
+                    }
+                }
+            }
+        }
+
         static void Swap(double[] input, int i, int k)
         {
             input[i] = input[i] + input[k];
             input[k] = input[i] - input[k];
             input[i] = input[i] - input[k];
+        }
+
+        static void Swap(int[] input, int i, int k)
+        {
+            var temp = input[i];
+            input[i] = input[k];
+            input[k] = temp;
         }
 
         static void Swap(List<int> input, int i, int k)
@@ -1335,6 +2237,16 @@ namespace ScratchPad
             }
         }
         #endregion
+
+        // public static bool IsPrime(int number)
+        // {
+        //     //Code here
+        // }
+        
+        // public static string Reverse(string str)
+        // {
+        //     //Code here
+        // }
 
     }
 }

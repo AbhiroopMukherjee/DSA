@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AlgoOnGraphs/AlgoOnGraphs.csproj",
+                "${workspaceFolder}/Algorithms/ScratchPad.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/AlgoOnGraphs/AlgoOnGraphs.csproj",
+                "${workspaceFolder}/Algorithms/ScratchPad.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/AlgoOnGraphs/AlgoOnGraphs.csproj"
+                "${workspaceFolder}/Algorithms/ScratchPad.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
